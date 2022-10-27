@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     }
+
+    public function tracks()
+    {
+        return $this->hasMany(Track::class);
+    }
 }

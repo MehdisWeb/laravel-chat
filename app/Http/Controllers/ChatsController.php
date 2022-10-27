@@ -24,9 +24,21 @@ class ChatsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($userid =null)
     {
-        return view('chat');
+        
+        $reciever = 4;
+        if (!is_null($userid)){
+           
+        $reciever = $userid;
+        }
+
+        if (!is_null($userid) && auth()->user()->role  !='admin'){
+            session()->flash('error', "Sorry you don't have access to this page, only Admin does");
+            return redirect('/');
+        }
+        
+            return view('chat',compact('reciever'));
     }
 
     /**
@@ -48,12 +60,14 @@ class ChatsController extends Controller
     public function sendMessage(Request $request)
     {
         $user = Auth::user();
-
+        $reciever = $request->input('reciever');
         $message = $user->messages()->create([
-            'message' => $request->input('message')
+            'message' => $request->input('message'),
+            'reciever' =>$request->input('reciever')
+            
         ]);
 
-        broadcast(new MessageSent($user, $message))->toOthers();
+        broadcast(new MessageSent($user, $message,$reciever))->toOthers();
 
         return ['status' => 'Message Sent!'];
     }

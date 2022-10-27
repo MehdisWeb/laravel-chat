@@ -12,7 +12,7 @@
 
 <script>
     export default {
-        props: ['user'],
+        props: ['user','reciever'],
 
         data() {
             return {
@@ -22,9 +22,15 @@
 
         methods: {
             sendMessage() {
+                console.log('iam working')
+                console.log(this.reciever)
+                 if(!this.newMessage || this.newMessage.trim() === '') {
+                    return
+                }
                 this.$emit('messagesent', {
                     user: this.user,
-                    message: this.newMessage
+                    message: this.newMessage,
+                    reciever:this.reciever
                 });
 
                 this.newMessage = ''
