@@ -23,6 +23,7 @@ Route::get('chatuser', 'ChatsController@index')->name('chat');
 Route::get('messages', 'ChatsController@fetchMessages');
 Route::post('messages', 'ChatsController@sendMessage');
 
+
 Route::get('users', 'UserController@index')->name('users.index');
 Route::get('usercreate', 'UserController@create')->name('users.create');
 Route::get('useredit/{userid}', 'UserController@edit')->name('users.edit');

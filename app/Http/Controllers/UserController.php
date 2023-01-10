@@ -24,6 +24,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //
     public function index()
     {
         if (is_null($this->user) || !$this->user->id == 4) {
@@ -39,6 +40,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //فتح صفحة إنشاء مستخدم
     public function create()
     {
         if (is_null($this->user) || !$this->user->role == "admin") {
@@ -55,6 +57,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //حفظ مستخدم جديد
     public function store(Request $request)
     {
         
@@ -101,6 +104,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+     //فتح بروفايل المتستخدم
     public function profile()
     {
         $user = auth()->user();
@@ -108,6 +112,7 @@ class UserController extends Controller
     }
 
 
+    //فتح صفحة تعديل المستخدم مع عرض بياناته
     public function edit(int $id)
     {
         if (is_null($this->user) || !$this->user->role == 'admin') {
@@ -126,6 +131,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     
+     //تحديث بروفايل المستخدم
     public function updateprofile(Request $request)
     {
        
@@ -157,6 +163,7 @@ class UserController extends Controller
     }
     
 
+    //تحديث بيانات مستخدم
     public function update(Request $request, int $id)
     {
         if (is_null($this->user) || !$this->user->role == 'admin') {
@@ -205,6 +212,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //تحذف مستخدم
     public function destroy(int $id)
     {
         if (is_null($this->user) || !$this->user->role == 'admin') {
@@ -229,6 +237,7 @@ class UserController extends Controller
     }
     
 
+    //تفتح صفحة الى مابس MAPS
     public function track(){
         
         if (auth()->user()->role  !='admin'){
@@ -242,6 +251,7 @@ class UserController extends Controller
 
     }
 
+    //تاخذ إحداثيات المستخدمين من قاعدة البيانات و ترسلها الى صفحة العرض
     public function LiveTrackingUsers($id){
         if($id=="ALL"){
             $users = User::with('tracks')->get();

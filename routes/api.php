@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+   // return $request->user();
+//});
+
+Route::post('login', 'ApiUserController@login')->name('apilogin');
+Route::post('updatelocation', 'ApiUserController@updateLocation')->name('updatelocation');
+Route::get('messages/{email}', 'ApiUserController@getMessages')->name('get.messages');
+Route::post('addmessage', 'ApiUserController@sendMessages')->name('send.messages');
+
+
+

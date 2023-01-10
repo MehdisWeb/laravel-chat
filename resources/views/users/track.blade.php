@@ -1,108 +1,105 @@
-<html>
-    <head>
-        <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    </head>
-    <body>
-        
-    
-    <section class="section">
-        <div class="section-header">
-            <h1 class="page__heading">Live Tracking</h1>
-                            
-                            <p id ="lfusers"> Filter users </p>
-                             {{Form::select('drp_client',$users,null,['id'=>'filterUser','class'=>'form-select form-select-lg mb-3', 'placeholder' => 'All'])  }} 
-                
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Sidebar 01</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-                
-                
-               
-                <!--
-                <a href="#" class="btn btn-primary filter-container__btn mt-4 float-right" data-toggle="modal"
-                   data-target="#AddModal">{{ __('messages.project.new_project') }} <i class="fas fa-plus"></i></a>-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{asset('assets/css/style2.css')}}">
+        <!-- link bootstrap -->
+        <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5">
+		  		<a href="{{ route('users.index') }}"><img src="{{ asset('assets/images/logo2.png') }}" alt="" width="200px" height="250px"></a>
+	        <ul class="list-unstyled components mb-5">
+              <li class="{{ Route::is('users.index')  ? 'active' : '' }}">
+	              <a href="{{ route('users.index') }}">All Teachers</a>
+	          </li>
+              <li class="{{ Route::is('users.create')  ? 'active' : '' }}">
+	              <a href="{{ route('users.create') }}">Create Teacher</a>
+	          </li>
+              <li class="{{ Route::is('users.track')  ? 'active' : '' }}">
+	              <a href="{{route('users.track')}}">Track Teacher</a>
+	          </li>
+              <li class="{{ Route::is('users.profile')  ? 'active' : '' }}">
+	              <a href="{{route('users.profile')}}">Profile</a>
+	          </li>
+	        </ul>
+
+	        <div class="footer">
+	        	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved Al-Quds Open University <i class="icon-heart" aria-hidden="true"></i> by Students Of <a href="https://www.qou.edu/" target="_blank">Qou.edu</a>
+						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	        </div>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item {{ Route::is('users.index')  ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('users.index') }}">All Teachers</a>
+                </li>
+                <li class="nav-item {{ Route::is('users.create')  ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('users.create') }}">Create Teacher</a>
+                </li>
+                <li class="nav-item {{ Route::is('users.track')  ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('users.track')}}">Track Teacher</a>
+                </li>
+                <li class="nav-item {{ Route::is('users.profile')  ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('users.profile')}}">Profile</a>
+                </li>
+              </ul>
             </div>
-        </div>
-        <br>
-        <div class="section-body">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                           <!-- create map -->
-                            <div class="row">
-                                 <div class="col-md-12">
-                                      <div class="card">
-                                        <div class="card-body">
-                                             <div id="map" style="height: 650px;"></div>
-                                        </div>
-                                      </div>
-                                 </div>
-                            </div>
-                            <!--
-                            <div id="assignProjectUserModal" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">{{ __('messages.project.edit_assignee') }}</h5>
-                                            <button type="button" aria-label="Close" class="close outline-none"
-                                                    data-dismiss="modal">×
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            {!! Form::open(['id'=>'editProjectAssign']) !!}
-                                            <div class="alert alert-danger display-none"
-                                                 id="editValidationErrorsBox"></div>
-                                            <div class="row">
-                                                <input type="text" hidden id="hdnProjectId">
-                                                <div class="form-group col-sm-12">
-                                                    {{ Form::label('assign_to', __('messages.task.assign_to').':') }}
-                                                    {{ Form::select('projects[]',$users,null,['class' => 'form-control projectName','id'=>'editProjectUser', 'multiple' => true]) }}
-                                                </div>
-                                            </div>
-                                            <div class="text-right">
-                                                {{ Form::button(__('messages.common.save'), ['type' => 'submit', 'class' => 'btn btn-primary ml-1', 'id' => 'btnSaveAssigneesProject', 'data-loading-text' => "<span class='spinner-border spinner-border-sm'></span> Processing..."]) }}
-                                                <button type="button" class="btn btn-light ml-1" data-dismiss="modal">{{ __('messages.common.cancel') }}</button>
-                                            </div>
-                                        </div>
-                                        {{ Form::close() }}
-                                    </div>
-                                </div>
-                            </div>-->
-                        </div>
-                    </div>
+          </div>
+        </nav>
+
+        <h2 class="mb-4">Live Tracking</h2>
+          <!-- data table start -->
+          <div class="col-12 mt-5">
+             <div class="card">
+
+                <div class="card-body">
+                {{Form::select('drp_client',$users,null,['id'=>'filterUser','class'=>'form-select form-select-lg mb-3', 'placeholder' => 'All'])  }} 
+
+                        <div id="map" style="height: 650px;"></div>
                 </div>
-            </div>
-        </div>
+             </div>
+		</div>
 
-    </section>
-
-    <style>
-        #filterUser{
-            margin-left:30%;
-            width:68%
-        }
-       .card-body{
-        margin-left:8px;
-        margin-right:8px;
-       }
-       .page__heading{
-        font-size: 67px;
-        margin-left: 36%;
-        margin-top: 48px;
-        margin-bottom: 65px;
-       }
-
-       #lfusers{
-        margin-left: 300px;
-        margin-bottom: -34px;
-        font-size: 27px;
-       }
-    </style>
-    
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/js/popper.js')}}"></script>
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcFcIWMZijbqaWz_heQzSxXv5UJB2p0bo&callback=initMap&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHLVXw1D1IWnldSu-F_wSX2ngtPSAZDPc&callback=initMap&v=weekly"
         async
         ></script>
     <script>
@@ -117,39 +114,74 @@
 
         //init map
         function initMap() {
-            var constantine = {lat: 36.3570, lng: 6.6390};
+            var constantine = {lat: 32.24014138659281, lng: 35.23526067211441};
             map = new google.maps.Map(document.getElementById('map'), {
-                center: constantine,
-                zoom: 8,
-                mapTypeId: 'roadmap',
+                center: {lat : 32.240162582874156, lng : 35.23539909299051},
+                zoom: 19,
+                mapTypeId: 'satellite',
                 mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU}
             });
-            infoWindow = new google.maps.InfoWindow();
 
+            const bounds = {
+                17: [
+                [20969, 20970],
+                [50657, 50658],
+                ],
+                18: [
+                [41939, 41940],
+                [101315, 101317],
+                ],
+                19: [
+                [83878, 83881],
+                [202631, 202634],
+                ],
+                20: [
+                [167757, 167763],
+                [405263, 405269],
+                ],
+            };
 
-            //searchButton = document.getElementById("searchButton").onclick = searchLocations;
-            /*
-            //create marker
-            var marker = new google.maps.Marker({
-                map: map,
-                position: constantine,
-                draggable: true,
-                animation: google.maps.Animation.DROP,
-                title: 'Los Angeles'
+              const imageMapType = new google.maps.ImageMapType({
+                getTileUrl: function (coord, zoom) {
+                    console.log(zoom)
+                    if(zoom>=19){
+                        //                        return "https://iili.io/HzmUV3X.png";
+
+                        return "https://iili.io/HzmUV3X.md.png";
+                    }
+                if (
+                    zoom < 17 ||
+                    zoom > 20 ||
+                    bounds[zoom][0][0] > coord.x ||
+                    coord.x > bounds[zoom][0][1] ||
+                    bounds[zoom][1][0] > coord.y ||
+                    coord.y > bounds[zoom][1][1]
+                ) {
+                    return "";
+                }
+                return [
+                    "https://www.gstatic.com/io2010maps/tiles/5/L2_",
+                    zoom,
+                    "_",
+                    coord.x,
+                    "_",
+                    coord.y,
+                    ".png",
+                ].join("");
+                },
+                //tilesSize full size of the image
+                //tilesSize full screen size
+//                tileSize: new google.maps.Size(1366, 768),
+
+                tileSize: new google.maps.Size(1366, 768),
             });
-            markers.push(marker);
-            google.maps.event.addListener(marker, 'click', function() {
-                infoWindow.setContent(marker.title);
-                infoWindow.open(map, marker);
-            });
-            google.maps.event.addListener(marker, 'dragend', function() {
-                var lat = marker.getPosition().lat();
-                var lng = marker.getPosition().lng();
-                console.log(lat);
-                console.log(lng);
-            });*/
+              map.overlayMapTypes.push(imageMapType);
+
+            //infoWindow = new google.maps.InfoWindow();
             getUsers("ALL");
         }
+        window.initMap = initMap;
+
 
         function getUsers(mID){
             //ajax request to get users livetracking and add marker for each one
@@ -163,8 +195,8 @@
                         if(Array.isArray(user.tracks) && user.tracks.length){
                             console.log(data)
                         var latlng = new google.maps.LatLng(
-                            parseFloat(user.tracks[0].long),
-                            parseFloat(user.tracks[0].lat));
+                            parseFloat(user.tracks[0].lat),
+                            parseFloat(user.tracks[0].long));
                         var name = user.name;
                         var html = "<b>" + name + "</b> <br/>" + user.updated_at;
                         var marker = new google.maps.Marker({
@@ -205,7 +237,6 @@
 
         $(document).on('change', '#filterUser', function () {
             var selectedValue = $('#filterUser').val();
-            alert(selectedValue);
             beforeMethodUpdateMarkers(selectedValue,"users");
         });
 
@@ -326,8 +357,8 @@
                         var user = data[i];
                         var mIcon = getMapIcons(user.department_id);
                         var latlng = new google.maps.LatLng(
-                            parseFloat(user.longitude),
-                            parseFloat(user.latitude));
+                            parseFloat(user.latitude),
+                            parseFloat(user.longitude));
                         var name = user.name;
                         var html = "<b>" + name + "</b> <br/>" + user.updated_at;
                         var marker = new google.maps.Marker({
@@ -402,6 +433,5 @@
 
 
     </script>
-</body>
+  </body>
 </html>
-

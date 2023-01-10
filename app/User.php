@@ -27,6 +27,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static $rules = [
+        'name'                  => 'required|max:250',
+        'email'                 => 'required|email:filter|unique:users,email',
+        'password'              => 'nullable|min:6|required_with:password_confirmation|same:password_confirmation',
+    ];
+
     /**
      * A user can have many messages
      *
